@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Advisor - Offline Agricultural Guidance</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <span>Farm Advisor</span>
+                </div>
+                <div class="language-toggle">
+                    <button id="langToggle" class="lang-btn">
+                        <i class="fas fa-language"></i>
+                        <span id="langText">English</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-content">
+                    <h1 id="welcomeTitle">Welcome to Farm Advisor</h1>
+                    <p id="welcomeSubtitle">Get instant agricultural guidance using voice or text - completely offline!</p>
+                    <div class="status-indicator">
+                        <span id="statusText" class="status-online">
+                            <i class="fas fa-circle"></i>
+                            System Ready
+                        </span>
+                    </div>
+                </div>
+                <div class="welcome-illustration">
+                    <i class="fas fa-tractor"></i>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions">
+                <h2 id="quickActionsTitle">Ask Your Question</h2>
+                <div class="action-buttons">
+                    <button id="voiceBtn" class="action-btn voice-btn">
+                        <i class="fas fa-microphone"></i>
+                        <span id="voiceBtnText">Ask by Voice</span>
+                        <div class="voice-animation">
+                            <div class="pulse"></div>
+                        </div>
+                    </button>
+                    <button id="textBtn" class="action-btn text-btn">
+                        <i class="fas fa-keyboard"></i>
+                        <span id="textBtnText">Type Question</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Text Input Section -->
+            <section id="textSection" class="text-section hidden">
+                <div class="input-container">
+                    <div class="input-group">
+                        <textarea id="questionInput" 
+                                  placeholder="Type your farming question here..."
+                                  rows="3"></textarea>
+                        <button id="sendBtn" class="send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Voice Section -->
+            <section id="voiceSection" class="voice-section hidden">
+                <div class="voice-container">
+                    <div class="voice-visualizer">
+                        <div class="voice-circle">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <div class="voice-waves">
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                            <div class="wave"></div>
+                        </div>
+                    </div>
+                    <p id="voiceStatus">Click to start speaking...</p>
+                    <div class="voice-controls">
+                        <button id="startVoiceBtn" class="voice-control-btn start">
+                            <i class="fas fa-play"></i>
+                            Start
+                        </button>
+                        <button id="stopVoiceBtn" class="voice-control-btn stop" disabled>
+                            <i class="fas fa-stop"></i>
+                            Stop
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Answer Section -->
+            <section id="answerSection" class="answer-section hidden">
+                <div class="answer-container">
+                    <div class="answer-header">
+                        <h3 id="answerTitle">Answer</h3>
+                        <div class="answer-controls">
+                            <button id="speakBtn" class="control-btn" title="Listen to answer">
+                                <i class="fas fa-volume-up"></i>
+                            </button>
+                            <button id="copyBtn" class="control-btn" title="Copy answer">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="answer-content">
+                        <div class="question-display">
+                            <strong id="questionLabel">Question:</strong>
+                            <span id="questionDisplay"></span>
+                        </div>
+                        <div class="answer-display">
+                            <div id="answerDisplay"></div>
+                        </div>
+                    </div>
+                    <div class="answer-footer">
+                        <button id="newQuestionBtn" class="new-question-btn">
+                            <i class="fas fa-plus"></i>
+                            <span id="newQuestionText">Ask Another Question</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories Section -->
+            <section class="categories-section">
+                <h2 id="categoriesTitle">Browse Topics</h2>
+                <div class="categories-grid" id="categoriesGrid">
+                    <div class="category-card" data-category="crop_planning">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3 id="cropPlanningTitle">Crop Planning</h3>
+                        <p id="cropPlanningDesc">Planting times and seasons</p>
+                    </div>
+                    <div class="category-card" data-category="soil_management">
+                        <i class="fas fa-seedling"></i>
+                        <h3 id="soilTitle">Soil Management</h3>
+                        <p id="soilDesc">Testing and improvement</p>
+                    </div>
+                    <div class="category-card" data-category="irrigation">
+                        <i class="fas fa-tint"></i>
+                        <h3 id="irrigationTitle">Irrigation</h3>
+                        <p id="irrigationDesc">Water management</p>
+                    </div>
+                    <div class="category-card" data-category="pest_disease">
+                        <i class="fas fa-bug"></i>
+                        <h3 id="pestTitle">Pest Control</h3>
+                        <p id="pestDesc">Disease management</p>
+                    </div>
+                    <div class="category-card" data-category="fertilizers">
+                        <i class="fas fa-flask"></i>
+                        <h3 id="fertilizerTitle">Fertilizers</h3>
+                        <p id="fertilizerDesc">Nutrient management</p>
+                    </div>
+                    <div class="category-card" data-category="weather_climate">
+                        <i class="fas fa-cloud-sun"></i>
+                        <h3 id="weatherTitle">Weather</h3>
+                        <p id="weatherDesc">Climate adaptation</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Questions -->
+            <section class="recent-section">
+                <h2 id="recentTitle">Recent Questions</h2>
+                <div class="recent-questions" id="recentQuestions">
+                    <div class="recent-placeholder">
+                        <i class="fas fa-history"></i>
+                        <p id="recentPlaceholder">Your recent questions will appear here</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p id="footerText">&copy; 2025 Farm Advisor - Offline Agricultural Guidance System</p>
+                </div>
+                <div class="footer-stats">
+                    <span id="connectionStatus">Offline Mode</span>
+                    <span id="systemInfo"></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p id="loadingText">Processing your question...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="static/js/app.js"></script>
+    <script src="static/js/speech.js"></script>
+</body>
+</html>
